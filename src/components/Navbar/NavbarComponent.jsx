@@ -6,19 +6,69 @@ const NavbarComponent = () => {
   const navLinks = (
     <>
       <li>
-        <NavLink to="/">Home</NavLink>
+        <NavLink
+          to="/"
+          className={({ isActive, isTransitioning }) =>
+            [
+              isActive ? "active font-bold text-blue-700 text-lg" : "text-lg",
+              isTransitioning ? "transitioning" : "",
+            ].join(" ")
+          }
+        >
+          Home
+        </NavLink>
       </li>
       <li>
-        <NavLink to="aboutUs">About us</NavLink>
+        <NavLink
+          to="aboutUs"
+          className={({ isActive, isTransitioning }) =>
+            [
+              isActive ? "active font-bold text-blue-700 text-lg" : " text-lg",
+              isTransitioning ? "transitioning" : "",
+            ].join(" ")
+          }
+        >
+          About us
+        </NavLink>
       </li>
       <li>
-        <NavLink to="bioData">Bio-data</NavLink>
+        <NavLink
+          to="bioDatas"
+          className={({ isActive, isTransitioning }) =>
+            [
+              isActive ? "active font-bold text-blue-700 text-lg" : " text-lg",
+              isTransitioning ? "transitioning" : "",
+            ].join(" ")
+          }
+        >
+          Bio-data
+        </NavLink>
       </li>
       <li>
-        <NavLink to="contactUs">Contact us</NavLink>
+        <NavLink
+          to="contactUs"
+          className={({ isActive, isTransitioning }) =>
+            [
+              isActive ? "active font-bold text-blue-700 text-lg" : " text-lg",
+              isTransitioning ? "transitioning" : "",
+            ].join(" ")
+          }
+        >
+          Contact us
+        </NavLink>
       </li>
       <li>
-        <NavLink to="contactUs">Login</NavLink>
+        <NavLink
+          to="login"
+          className={({ isActive, isTransitioning }) =>
+            [
+              isActive ? "active font-bold text-blue-700 text-lg" : " text-lg",
+              isTransitioning ? "transitioning" : "",
+            ].join(" ")
+          }
+        >
+          Login
+        </NavLink>
       </li>
     </>
   );
@@ -27,7 +77,7 @@ const NavbarComponent = () => {
     <div className="max-w-7xl mx-auto py-2">
       <Navbar fluid rounded>
         <Navbar.Brand href="/">
-          <img src={logo} className="mr-3 h-6 sm:h-9" alt="Logo" />
+          <img src={logo} className="h-14 " alt="Logo" />
           <span className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
             Match Maker
           </span>
@@ -59,7 +109,17 @@ const NavbarComponent = () => {
           </Dropdown>
           <Navbar.Toggle />
         </div>
-        <Navbar.Collapse>{navLinks}</Navbar.Collapse>
+        <Navbar.Collapse>
+          {navLinks}
+
+          {/* <Navbar.Link href="/" active>
+            Home
+          </Navbar.Link>
+          <Navbar.Link href="aboutUs">About us</Navbar.Link>
+          <Navbar.Link href="bioDatas">Bio-data</Navbar.Link>
+          <Navbar.Link href="contactUs">Contact us</Navbar.Link>
+          <Navbar.Link href="login">Login</Navbar.Link> */}
+        </Navbar.Collapse>
       </Navbar>
     </div>
   );

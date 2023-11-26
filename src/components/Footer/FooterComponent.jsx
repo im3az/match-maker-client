@@ -6,26 +6,31 @@ import {
   BsInstagram,
   BsTwitter,
 } from "react-icons/bs";
+import logo from "../../assets/logo.png";
 
 const FooterComponent = () => {
   return (
-    <div>
+    <div className="max-w-7xl mx-auto">
       <Footer container>
         <div className="w-full">
           <div className="grid w-full justify-between sm:flex sm:justify-between md:flex md:grid-cols-1">
             <div>
-              <Footer.Brand
-                href="https://flowbite.com"
-                src="https://flowbite.com/docs/images/logo.svg"
-                alt="Flowbite Logo"
-                name="Flowbite"
-              />
+              {/* <Footer.Brand
+              href="/"
+              src={logo}
+              alt="Logo"
+              name="Match maker"
+              /> */}
+              <img src={logo} className="h-20" alt="Logo" />
+              <span className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
+                Match Maker
+              </span>
             </div>
             <div className="grid grid-cols-2 gap-8 sm:mt-4 sm:grid-cols-3 sm:gap-6">
               <div>
                 <Footer.Title title="about" />
                 <Footer.LinkGroup col>
-                  <Footer.Link href="#">Flowbite</Footer.Link>
+                  <Footer.Link href="#">Match maker</Footer.Link>
                   <Footer.Link href="#">Tailwind CSS</Footer.Link>
                 </Footer.LinkGroup>
               </div>
