@@ -51,7 +51,7 @@ const Banner = () => {
         </SwiperSlide>
         <SwiperSlide>
           <div className="title" data-swiper-parallax="-300">
-            Trust by 1500+ Couples
+            Trusted by 1500+ Couples
           </div>
           <div className="subtitle" data-swiper-parallax="-200">
             Start you matrimony service today.

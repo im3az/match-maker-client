@@ -5,11 +5,14 @@ import AboutUs from "../pages/aboutUs/AboutUs";
 import BioDatas from "../pages/bioDatas/BioDatas";
 import ContactUs from "../pages/contactUs/ContactUs";
 import Login from "../pages/login/Login";
+import ErrorPage from "../pages/erropage/ErrorPage";
+import Registration from "../pages/registration/Registration";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <Main />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
@@ -27,10 +30,14 @@ export const router = createBrowserRouter([
         path: "contactUs",
         element: <ContactUs />,
       },
-      {
-        path: "login",
-        element: <Login />,
-      },
     ],
+  },
+  {
+    path: "login",
+    element: <Login />,
+  },
+  {
+    path: "registration",
+    element: <Registration />,
   },
 ]);
