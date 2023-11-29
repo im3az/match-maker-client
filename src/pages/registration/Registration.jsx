@@ -1,66 +1,105 @@
 import { Button } from "flowbite-react";
 import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import useAuth from "../../hooks/useAuth";
 
 const Registration = () => {
+  const { createUser } = useAuth();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm();
+
+  const onSubmit = (data) => {
+    console.log(data);
+    createUser(data.email, data.password).then((result) => {
+      const loggedUser = result.user;
+      console.log(loggedUser);
+    });
+  };
+
   return (
     <div className="w-full mx-auto my-14 max-w-md p-8 space-y-3 rounded-xl bg-gray-50 text-gray-800">
       <h1 className="text-2xl font-bold text-center">Registration</h1>
-      <form noValidate="" action="" className="space-y-6">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         <div className="space-y-1 text-sm">
-          <label htmlFor="username" className="block text-gray-600">
-            Username
-          </label>
+          <label className="block text-gray-600">User name</label>
           <input
             type="text"
             name="username"
-            id="username"
-            placeholder="Username"
+            {...register("name", { required: true })}
+            placeholder="User name"
             className="w-full px-4 py-3 rounded-md border-gray-300 bg-gray-50 text-gray-800 focus:border-violet-600"
           />
+          {errors.name && (
+            <span className="text-red-600">Name is required</span>
+          )}
         </div>
+
         <div className="space-y-1 text-sm">
-          <label htmlFor="photo" className="block text-gray-600">
-            Photo URL
-          </label>
+          <label className="block text-gray-600">Photo URL</label>
           <input
             type="text"
             name="photo"
-            id="photo"
+            {...register("photo", { required: true })}
             placeholder="Photo url"
             className="w-full px-4 py-3 rounded-md border-gray-300 bg-gray-50 text-gray-800 focus:border-violet-600"
           />
+          {errors.photo && (
+            <span className="text-red-600">Name is required</span>
+          )}
         </div>
+
         <div className="space-y-1 text-sm">
-          <label htmlFor="email" className="block text-gray-600">
-            Email
-          </label>
+          <label className="block text-gray-600">Email</label>
           <input
-            type="text"
+            type="email"
             name="email"
-            id="email"
+            {...register("email", { required: true })}
             placeholder="Email"
             className="w-full px-4 py-3 rounded-md border-gray-300 bg-gray-50 text-gray-800 focus:border-violet-600"
           />
+          {errors.email && (
+            <span className="text-red-600">Name is required</span>
+          )}
         </div>
+
         <div className="space-y-1 text-sm">
-          <label htmlFor="password" className="block text-gray-600">
-            Password
-          </label>
+          <label className="block text-gray-600">Password</label>
           <input
             type="password"
             name="password"
-            id="password"
+            {...register("password", {
+              required: true,
+              minLength: 6,
+              pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/,
+            })}
             placeholder="Password"
             className="w-full px-4 py-3 rounded-md border-gray-300 bg-gray-50 text-gray-800 focus:border-violet-600"
           />
+          {errors.password?.type === "required" && (
+            <p className="text-red-600">Password is required</p>
+          )}
+          {errors.password?.type === "minLength" && (
+            <p className="text-red-600">
+              Password must be 6 characters or more
+            </p>
+          )}
+          {errors.password?.type === "pattern" && (
+            <p className="text-red-600">
+              Password must have at least 1 uppercase, 1 lowercase , 1 number
+              and 1 special characters.
+            </p>
+          )}
         </div>
-        <Button className="w-full">Register</Button>
+
+        <Button type="submit" className="w-full">
+          Register
+        </Button>
       </form>
-      <div className="flex items-center pt-4 space-x-1">
-        {/* <div className="flex-1 h-px sm:w-16 bg-gray-300"></div>
-        <p className="px-3 text-sm text-gray-600">Login with google accounts</p>
-        <div className="flex-1 h-px sm:w-16 bg-gray-300"></div> */}
-      </div>
       <p className="text-xs text-center sm:px-6 text-gray-600">
         Already have an account?
         <Link

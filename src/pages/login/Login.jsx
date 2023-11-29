@@ -1,20 +1,39 @@
 import { Button } from "flowbite-react";
 import { FaGoogle } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 const Login = () => {
+  const { login } = useAuth();
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    // console.log(email, password);
+    login(email, password).then((result) => {
+      const user = result.user;
+      console.log(user);
+    });
+  };
+
   return (
     <div className="w-full mx-auto my-14 max-w-md p-8 space-y-3 rounded-xl bg-gray-50 text-gray-800">
       <h1 className="text-2xl font-bold text-center">Login</h1>
-      <form noValidate="" action="" className="space-y-6">
+      <form
+        onSubmit={handleLogin}
+        noValidate=""
+        action=""
+        className="space-y-6"
+      >
         <div className="space-y-1 text-sm">
           <label htmlFor="email" className="block text-gray-600">
             Email
           </label>
           <input
-            type="text"
+            type="email"
             name="email"
-            id="email"
             placeholder="Email"
             className="w-full px-4 py-3 rounded-md border-gray-300 bg-gray-50 text-gray-800 focus:border-violet-600"
           />
@@ -26,12 +45,13 @@ const Login = () => {
           <input
             type="password"
             name="password"
-            id="password"
             placeholder="Password"
             className="w-full px-4 py-3 rounded-md border-gray-300 bg-gray-50 text-gray-800 focus:border-violet-600"
           />
         </div>
-        <Button className="w-full">Login</Button>
+        <Button type="submit" className="w-full">
+          Login
+        </Button>
       </form>
       <div className="flex items-center pt-4 space-x-1">
         <div className="flex-1 h-px sm:w-16 bg-gray-300"></div>
