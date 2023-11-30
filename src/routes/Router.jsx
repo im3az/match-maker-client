@@ -7,6 +7,7 @@ import ContactUs from "../pages/contactUs/ContactUs";
 import Login from "../pages/login/Login";
 import ErrorPage from "../pages/erropage/ErrorPage";
 import Registration from "../pages/registration/Registration";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -24,7 +25,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "bioDatas",
-        element: <BioDatas />,
+        element: (
+          <PrivateRoute>
+            <BioDatas />
+          </PrivateRoute>
+        ),
       },
       {
         path: "contactUs",

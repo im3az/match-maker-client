@@ -1,10 +1,15 @@
 import { Button } from "flowbite-react";
 import { FaGoogle } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import Swal from "sweetalert2";
 
 const Login = () => {
   const { login } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -12,10 +17,22 @@ const Login = () => {
     const email = form.email.value;
     const password = form.password.value;
     // console.log(email, password);
-    login(email, password).then((result) => {
-      const user = result.user;
-      console.log(user);
-    });
+    login(email, password)
+      .then((result) => {
+        if (result.user) {
+          Swal.fire({
+            icon: "success",
+            title: "Login successful",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+
+          navigate(from, { replace: true });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (

@@ -1,10 +1,12 @@
 import { Button } from "flowbite-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
+import Swal from "sweetalert2";
 
 const Registration = () => {
   const { createUser } = useAuth();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -15,10 +17,27 @@ const Registration = () => {
 
   const onSubmit = (data) => {
     console.log(data);
-    createUser(data.email, data.password).then((result) => {
-      const loggedUser = result.user;
-      console.log(loggedUser);
-    });
+    createUser(data.email, data.password)
+      .then((result) => {
+        const loggedUser = result.user;
+
+        if (loggedUser) {
+          Swal.fire({
+            icon: "success",
+            title: "Registration successful",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          navigate("/");
+        }
+
+        console.log(loggedUser);
+      })
+      .catch((error) => {
+        console.log(error);
+        // toast.error(error.message, { id: toastId });
+        // setRegisterError(error.message);
+      });
   };
 
   return (

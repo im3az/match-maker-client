@@ -1,8 +1,25 @@
 import { Avatar, Dropdown, Navbar } from "flowbite-react";
 import logo from "../../assets/logo.png";
 import { NavLink } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 const NavbarComponent = () => {
+  const { user, loading, logOut } = useAuth();
+
+  // if (loading) {
+  //   return (
+  //     <div className="w-8 h-8 border-4 border-dashed rounded-full animate-spin border-violet-600 mx-auto"></div>
+  //   );
+  // }
+
+  const handleLogout = () => {
+    logOut()
+      .then(() => {
+        console.log("logged out");
+      })
+      .catch((error) => console.log(error));
+  };
+
   const navLinks = (
     <>
       <li>
@@ -57,19 +74,26 @@ const NavbarComponent = () => {
           Contact us
         </NavLink>
       </li>
-      <li>
-        <NavLink
-          to="login"
-          className={({ isActive, isTransitioning }) =>
-            [
-              isActive ? "active font-bold text-blue-700 text-lg" : " text-lg",
-              isTransitioning ? "transitioning" : "",
-            ].join(" ")
-          }
-        >
-          Login
-        </NavLink>
-      </li>
+
+      {/* {user ? (
+        <li></li>
+      ) : (
+        <li>
+          <NavLink
+            to="login"
+            className={({ isActive, isTransitioning }) =>
+              [
+                isActive
+                  ? "active font-bold text-blue-700 text-lg"
+                  : " text-lg",
+                isTransitioning ? "transitioning" : "",
+              ].join(" ")
+            }
+          >
+            Login
+          </NavLink>
+        </li>
+      )} */}
     </>
   );
 
@@ -83,43 +107,57 @@ const NavbarComponent = () => {
           </span>
         </Navbar.Brand>
         <div className="flex md:order-2">
-          <Dropdown
-            arrowIcon={false}
-            inline
-            label={
-              <Avatar
-                alt="User settings"
-                img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-                rounded
-                bordered
-              />
-            }
-          >
-            <Dropdown.Header>
-              <span className="block text-sm">Bonnie Green</span>
-              <span className="block truncate text-sm font-medium">
-                name@flowbite.com
-              </span>
-            </Dropdown.Header>
-            <Dropdown.Item>Dashboard</Dropdown.Item>
-            <Dropdown.Item>Settings</Dropdown.Item>
-            <Dropdown.Item>Earnings</Dropdown.Item>
-            <Dropdown.Divider />
-            <Dropdown.Item>Sign out</Dropdown.Item>
-          </Dropdown>
+          {user ? (
+            <Dropdown
+              arrowIcon={false}
+              inline
+              label={
+                <Avatar
+                  alt="User settings"
+                  img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+                  rounded
+                  bordered
+                />
+              }
+            >
+              <Dropdown.Header>
+                <span className="block text-sm">Bonnie Green</span>
+                <span className="block truncate text-sm font-medium">
+                  name@flowbite.com
+                </span>
+              </Dropdown.Header>
+              <Dropdown.Item>
+                <NavLink>Dashboard</NavLink>
+              </Dropdown.Item>
+              <Dropdown.Item>
+                <NavLink>Settings</NavLink>
+              </Dropdown.Item>
+              <Dropdown.Item>
+                <NavLink>Earnings</NavLink>
+              </Dropdown.Item>
+              <Dropdown.Divider />
+              <Dropdown.Item onClick={handleLogout}>Log out</Dropdown.Item>
+            </Dropdown>
+          ) : (
+            <li>
+              <NavLink
+                to="login"
+                className={({ isActive, isTransitioning }) =>
+                  [
+                    isActive
+                      ? "active font-bold text-blue-700 text-lg"
+                      : "text-lg",
+                    isTransitioning ? "transitioning" : "",
+                  ].join(" ")
+                }
+              >
+                Login
+              </NavLink>
+            </li>
+          )}
           <Navbar.Toggle />
         </div>
-        <Navbar.Collapse>
-          {navLinks}
-
-          {/* <Navbar.Link href="/" active>
-            Home
-          </Navbar.Link>
-          <Navbar.Link href="aboutUs">About us</Navbar.Link>
-          <Navbar.Link href="bioDatas">Bio-data</Navbar.Link>
-          <Navbar.Link href="contactUs">Contact us</Navbar.Link>
-          <Navbar.Link href="login">Login</Navbar.Link> */}
-        </Navbar.Collapse>
+        <Navbar.Collapse>{navLinks}</Navbar.Collapse>
       </Navbar>
     </div>
   );
