@@ -8,6 +8,11 @@ import Login from "../pages/login/Login";
 import ErrorPage from "../pages/erropage/ErrorPage";
 import Registration from "../pages/registration/Registration";
 import PrivateRoute from "./PrivateRoute";
+import Dashboard from "../layout/Dashboard";
+import EditBiodata from "../pages/dashboard/User/EditBiodata/EditBiodata";
+import ViewBiodata from "../pages/dashboard/User/ViewBiodata/ViewBiodata";
+import MyContactRequest from "../pages/dashboard/User/MyContactRequest/MyContactRequest";
+import FavoriteBiodata from "../pages/dashboard/User/FavoriteBiodata/FavoriteBiodata";
 
 export const router = createBrowserRouter([
   {
@@ -44,5 +49,27 @@ export const router = createBrowserRouter([
   {
     path: "registration",
     element: <Registration />,
+  },
+  {
+    path: "dashboard",
+    element: <Dashboard />,
+    children: [
+      {
+        path: "editBiodata",
+        element: <EditBiodata />,
+      },
+      {
+        path: "viewBiodata",
+        element: <ViewBiodata />,
+      },
+      {
+        path: "myContactRequest",
+        element: <MyContactRequest />,
+      },
+      {
+        path: "favoriteBiodata",
+        element: <FavoriteBiodata />,
+      },
+    ],
   },
 ]);

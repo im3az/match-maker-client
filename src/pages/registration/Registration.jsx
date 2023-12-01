@@ -5,7 +5,7 @@ import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 
 const Registration = () => {
-  const { createUser } = useAuth();
+  const { createUser, updateUserProfile } = useAuth();
   const navigate = useNavigate();
 
   const {
@@ -20,16 +20,21 @@ const Registration = () => {
     createUser(data.email, data.password)
       .then((result) => {
         const loggedUser = result.user;
-
-        if (loggedUser) {
-          Swal.fire({
-            icon: "success",
-            title: "Registration successful",
-            showConfirmButton: false,
-            timer: 1500,
+        updateUserProfile(data.name, data.photo)
+          .then(() => {
+            console.log("user updated");
+            reset();
+            Swal.fire({
+              icon: "success",
+              title: "Registration successful",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            navigate("/");
+          })
+          .catch((error) => {
+            console.log(error);
           });
-          navigate("/");
-        }
 
         console.log(loggedUser);
       })
@@ -48,7 +53,7 @@ const Registration = () => {
           <label className="block text-gray-600">User name</label>
           <input
             type="text"
-            name="username"
+            name="name"
             {...register("name", { required: true })}
             placeholder="User name"
             className="w-full px-4 py-3 rounded-md border-gray-300 bg-gray-50 text-gray-800 focus:border-violet-600"

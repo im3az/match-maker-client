@@ -6,11 +6,11 @@ import useAuth from "../../hooks/useAuth";
 const NavbarComponent = () => {
   const { user, loading, logOut } = useAuth();
 
-  // if (loading) {
-  //   return (
-  //     <div className="w-8 h-8 border-4 border-dashed rounded-full animate-spin border-violet-600 mx-auto"></div>
-  //   );
-  // }
+  if (loading) {
+    return (
+      <div className="w-8 h-8 border-4 border-dashed rounded-full animate-spin border-violet-600 mx-auto"></div>
+    );
+  }
 
   const handleLogout = () => {
     logOut()
@@ -114,26 +114,20 @@ const NavbarComponent = () => {
               label={
                 <Avatar
                   alt="User settings"
-                  img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+                  img={user.photoURL}
                   rounded
                   bordered
                 />
               }
             >
               <Dropdown.Header>
-                <span className="block text-sm">Bonnie Green</span>
+                <span className="block text-sm">{user.displayName}</span>
                 <span className="block truncate text-sm font-medium">
-                  name@flowbite.com
+                  {user.email}
                 </span>
               </Dropdown.Header>
               <Dropdown.Item>
-                <NavLink>Dashboard</NavLink>
-              </Dropdown.Item>
-              <Dropdown.Item>
-                <NavLink>Settings</NavLink>
-              </Dropdown.Item>
-              <Dropdown.Item>
-                <NavLink>Earnings</NavLink>
+                <NavLink to="/dashboard/editBiodata">Dashboard</NavLink>
               </Dropdown.Item>
               <Dropdown.Divider />
               <Dropdown.Item onClick={handleLogout}>Log out</Dropdown.Item>
