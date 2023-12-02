@@ -2,7 +2,8 @@ import { NavLink, Outlet } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import { FaRegEdit } from "react-icons/fa";
 import { SlLogout } from "react-icons/sl";
-import { GrView, GrContact, GrFavorite } from "react-icons/gr";
+import { GrView, GrContact, GrFavorite, GrHome } from "react-icons/gr";
+import { Button } from "flowbite-react";
 
 const Dashboard = () => {
   const { user, loading } = useAuth();
@@ -30,7 +31,7 @@ const Dashboard = () => {
               </span>
             </div>
           </div>
-          <div className="divide-y divide-gray-300">
+          <div className="divide-y divide-gray-400">
             <ul className="pt-2 pb-4 space-y-1 text-sm">
               <li className=" text-gray-900">
                 <NavLink
@@ -48,6 +49,7 @@ const Dashboard = () => {
                   <span>Edit Biodata</span>
                 </NavLink>
               </li>
+
               <li className=" text-gray-900">
                 <NavLink
                   style={({ isActive, isPending, isTransitioning }) => {
@@ -64,6 +66,7 @@ const Dashboard = () => {
                   <span>View Biodata</span>
                 </NavLink>
               </li>
+
               <li className=" text-gray-900">
                 <NavLink
                   style={({ isActive, isPending, isTransitioning }) => {
@@ -80,6 +83,7 @@ const Dashboard = () => {
                   <span>My contact request</span>
                 </NavLink>
               </li>
+
               <li className=" text-gray-900">
                 <NavLink
                   style={({ isActive, isPending, isTransitioning }) => {
@@ -97,16 +101,20 @@ const Dashboard = () => {
                 </NavLink>
               </li>
             </ul>
-            <ul className="pt-4 pb-2 space-y-1 text-sm">
-              <li>
-                <NavLink
-                  rel="noopener noreferrer"
-                  href="#"
-                  className="flex items-center p-2 space-x-3 rounded-md"
-                >
-                  <SlLogout />
-                  <span>Logout</span>
+            <ul className="pt-6 space-y-1">
+              <li className=" text-gray-900">
+                <NavLink to="/" className="flex items-center   ">
+                  <Button outline >
+                    <GrHome className="mr-2 h-4 w-6" />
+                    Home
+                  </Button>
                 </NavLink>
+              </li>
+              <li>
+                <Button outline >
+                  <SlLogout className="mr-2 h-4 w-5" />
+                  Logout
+                </Button>
               </li>
             </ul>
           </div>

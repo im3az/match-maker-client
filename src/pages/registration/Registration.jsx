@@ -40,8 +40,6 @@ const Registration = () => {
       })
       .catch((error) => {
         console.log(error);
-        // toast.error(error.message, { id: toastId });
-        // setRegisterError(error.message);
       });
   };
 
