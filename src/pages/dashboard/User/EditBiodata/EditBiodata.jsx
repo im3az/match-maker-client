@@ -1,6 +1,8 @@
 import { Button } from "flowbite-react";
 import { useForm, Controller } from "react-hook-form";
 import Select from "react-select";
+import useAuth from "../../../../hooks/useAuth";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 
 const genderOptions = [
   { value: "Male", label: "Male" },
@@ -40,20 +42,59 @@ const weightOptions = [
   { value: "70-80", label: "70-80" },
   { value: "80-90", label: "80-90" },
   { value: "90-100", label: "90-100" },
-  { value: "100 bm,", label: "100 bm," },
+];
+
+const religionOptions = [
+  { value: "Islam", label: "Islam" },
+  { value: "Hindu", label: "Hindu" },
+  { value: "Buddhism", label: "Buddhism" },
+  { value: "Christian", label: "Christian" },
 ];
 
 const EditBiodata = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-    control,
-  } = useForm();
+  const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const { register, handleSubmit, reset, control } = useForm();
+
+  const onSubmit = async (data) => {
+    // console.log(data);
+
+    const biodata = {
+      age: data.age,
+      dateOfBirth: data.dateOfBirth,
+      email: data.email,
+      fathersName: data.fathersName,
+      gender: data.gender,
+      height: data.height,
+      image: data.image,
+      mobileNumber: data.mobileNumber,
+      mothersName: data.mothersName,
+      name: data.name,
+      occupation: data.occupation,
+      partnerAge: data.partnerAge,
+      partnerHeight: data.partnerHeight,
+      partnerWeight: data.partnerWeight,
+      permanentDivision: data.permanentDivision,
+      presentDivision: data.presentDivision,
+      religion: data.religion,
+      weight: data.weight,
+    };
+
+    // console.log(biodata);
+
+    const biodataRes = await axiosSecure.put("/editBiodata", biodata);
+
+    console.log(biodataRes.data);
+
+    if (biodataRes.data.upsertedCount > 0) {
+      alert("Biodata created");
+    }
+    if (biodataRes.data.modifiedCount > 0) {
+      alert("Biodata Updated");
+    }
+
+    reset();
   };
 
   return (
@@ -278,13 +319,15 @@ const EditBiodata = () => {
             </div>
           </div>
 
-          {/*  Email, Mobile number*/}
+          {/*  Email, Mobile number, Religion*/}
           <div className="md:flex mb-8 gap-5">
             <div className="w-1/3">
               <label className="text-lg">Email</label>
               <input
                 type="email"
                 placeholder="Email"
+                defaultValue={user?.email}
+                readOnly
                 {...register("email", { required: true })}
                 className="w-full rounded-md focus:ring border-gray-300 text-gray-900"
               />
@@ -292,19 +335,27 @@ const EditBiodata = () => {
             <div className="w-1/3">
               <label className="text-lg">Mobile number</label>
               <input
-                type="number"
+                type="tel"
                 placeholder="Mobile number"
-                {...register("mobileNumber", { required: true })}
+                {...register("mobileNumber", {
+                  required: true,
+                })}
                 className="w-full rounded-md focus:ring border-gray-300 text-gray-900"
               />
             </div>
             <div className="w-1/3">
               <label className="text-lg">Religion</label>
-              <input
-                type="text"
-                placeholder="Religion"
-                {...register("religion", { required: true })}
-                className="w-full rounded-md focus:ring border-gray-300 text-gray-900"
+
+              <Controller
+                name="religion"
+                control={control}
+                render={({ field }) => (
+                  <Select
+                    options={religionOptions}
+                    value={religionOptions.find((c) => c.value === field.value)}
+                    onChange={(val) => field.onChange(val.value)}
+                  />
+                )}
               />
             </div>
           </div>

@@ -74,26 +74,6 @@ const NavbarComponent = () => {
           Contact us
         </NavLink>
       </li>
-
-      {/* {user ? (
-        <li></li>
-      ) : (
-        <li>
-          <NavLink
-            to="login"
-            className={({ isActive, isTransitioning }) =>
-              [
-                isActive
-                  ? "active font-bold text-blue-700 text-lg"
-                  : " text-lg",
-                isTransitioning ? "transitioning" : "",
-              ].join(" ")
-            }
-          >
-            Login
-          </NavLink>
-        </li>
-      )} */}
     </>
   );
 
