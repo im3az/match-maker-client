@@ -1,8 +1,8 @@
 import { Button } from "flowbite-react";
-import { FaGoogle } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
+import SocialLogin from "../../components/socialLogin/SocialLogin";
 
 const Login = () => {
   const { login } = useAuth();
@@ -76,9 +76,10 @@ const Login = () => {
         <div className="flex-1 h-px sm:w-16 bg-gray-300"></div>
       </div>
       <div className="flex justify-center space-x-4">
-        <Button aria-label="Log in with Google" className="p-3 rounded-sm">
+        {/* <Button aria-label="Log in with Google" className="p-3 rounded-sm">
           <FaGoogle />
-        </Button>
+        </Button> */}
+        <SocialLogin />
       </div>
       <p className="text-xs text-center sm:px-6 text-gray-600">
         Don&apos;t have an account?

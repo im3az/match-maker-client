@@ -3,9 +3,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const Registration = () => {
   const { createUser, updateUserProfile } = useAuth();
+  const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
 
   const {
@@ -16,21 +18,28 @@ const Registration = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
     createUser(data.email, data.password)
       .then((result) => {
         const loggedUser = result.user;
         updateUserProfile(data.name, data.photo)
           .then(() => {
-            console.log("user updated");
-            reset();
-            Swal.fire({
-              icon: "success",
-              title: "Registration successful",
-              showConfirmButton: false,
-              timer: 1500,
+            const userInfo = {
+              name: data.name,
+              email: data.email,
+            };
+
+            axiosPublic.post("/users", userInfo).then((res) => {
+              if (res.data.insertedId) {
+                reset();
+                Swal.fire({
+                  icon: "success",
+                  title: "Registration successful",
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+                navigate("/");
+              }
             });
-            navigate("/");
           })
           .catch((error) => {
             console.log(error);

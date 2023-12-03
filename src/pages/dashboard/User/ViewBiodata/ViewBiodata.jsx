@@ -7,8 +7,6 @@ const ViewBiodata = () => {
   if (loading) {
     return <Loader />;
   }
-
-  //   console.log(userBiodata);
   return (
     <div>
       {userBiodata.map((biodata) => (

@@ -26,9 +26,11 @@ const ViewBiodataCard = ({ biodata }) => {
     <div>
       <section className="text-gray-600 body-font overflow-hidden">
         <div className="container px-5 py-24 mx-auto">
+          <h2 className="text-center font-bold text-4xl lg:text-5xl  mb-10">
+            My biodata
+          </h2>
           <div className="lg:w-4/5 mx-auto flex flex-wrap">
             <img
-              alt="ecommerce"
               className="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded"
               src={image}
             />
@@ -71,9 +73,7 @@ const ViewBiodataCard = ({ biodata }) => {
                 Mobile Number: {mobileNumber}
               </h2>
 
-              
-                <Button className="mt-5">Make premium</Button>
-              
+              <Button className="mt-5">Make premium</Button>
             </div>
           </div>
         </div>
