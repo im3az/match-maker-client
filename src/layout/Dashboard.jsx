@@ -3,14 +3,20 @@ import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { FaRegEdit } from "react-icons/fa";
 import { SlLogout } from "react-icons/sl";
 import { GrView, GrContact, GrFavorite, GrHome } from "react-icons/gr";
-import { MdAdminPanelSettings,MdOutlineManageAccounts,MdWorkspacePremium,MdContacts    } from "react-icons/md";
+import {
+  MdAdminPanelSettings,
+  MdOutlineManageAccounts,
+  MdWorkspacePremium,
+  MdContacts,
+} from "react-icons/md";
 import { Button } from "flowbite-react";
 import Swal from "sweetalert2";
+import useAdmin from "../hooks/useAdmin";
 
 const Dashboard = () => {
   const { user, loading, logOut } = useAuth();
   const navigate = useNavigate();
-  const isAdmin = true;
+  const [isAdmin, isAdminLoading] = useAdmin();
 
   if (loading) {
     return (
@@ -85,7 +91,7 @@ const Dashboard = () => {
                       to="/dashboard/manageUsers"
                       className="flex items-center p-2 space-x-3 rounded-md"
                     >
-                      <MdOutlineManageAccounts className="text-lg"   />
+                      <MdOutlineManageAccounts className="text-lg" />
                       <span> Manage Users</span>
                     </NavLink>
                   </li>
