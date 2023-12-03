@@ -1,10 +1,12 @@
 import { Avatar, Dropdown, Navbar } from "flowbite-react";
 import logo from "../../assets/logo.png";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import Swal from "sweetalert2";
 
 const NavbarComponent = () => {
   const { user, loading, logOut } = useAuth();
+  const navigate = useNavigate();
 
   if (loading) {
     return (
@@ -16,6 +18,14 @@ const NavbarComponent = () => {
     logOut()
       .then(() => {
         console.log("logged out");
+        Swal.fire({
+          icon: "success",
+          title: "Logged out",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+
+        navigate("/");
       })
       .catch((error) => console.log(error));
   };
@@ -107,7 +117,7 @@ const NavbarComponent = () => {
                 </span>
               </Dropdown.Header>
               <Dropdown.Item>
-                <NavLink to="/dashboard/editBiodata">Dashboard</NavLink>
+                <NavLink to="/dashboard">Dashboard</NavLink>
               </Dropdown.Item>
               <Dropdown.Divider />
               <Dropdown.Item onClick={handleLogout}>Log out</Dropdown.Item>

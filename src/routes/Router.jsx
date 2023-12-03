@@ -13,6 +13,10 @@ import EditBiodata from "../pages/dashboard/User/EditBiodata/EditBiodata";
 import ViewBiodata from "../pages/dashboard/User/ViewBiodata/ViewBiodata";
 import MyContactRequest from "../pages/dashboard/User/MyContactRequest/MyContactRequest";
 import FavoriteBiodata from "../pages/dashboard/User/FavoriteBiodata/FavoriteBiodata";
+import AdminDashboard from "../pages/dashboard/Admin/AdminDashboard/AdminDashboard";
+import ManageUsers from "../pages/dashboard/Admin/ManageUsers/ManageUsers";
+import ApprovePremium from "../pages/dashboard/Admin/ApprovePremium/ApprovePremium";
+import ApproveContactRequest from "../pages/dashboard/Admin/ApproveContactRequest/ApproveContactRequest";
 
 export const router = createBrowserRouter([
   {
@@ -54,6 +58,7 @@ export const router = createBrowserRouter([
     path: "dashboard",
     element: <Dashboard />,
     children: [
+      // normal user routes
       {
         path: "editBiodata",
         element: <EditBiodata />,
@@ -69,6 +74,25 @@ export const router = createBrowserRouter([
       {
         path: "favoriteBiodata",
         element: <FavoriteBiodata />,
+      },
+
+      // admin routes
+
+      {
+        path: "adminDashboard",
+        element: <AdminDashboard />,
+      },
+      {
+        path: "manageUsers",
+        element: <ManageUsers />,
+      },
+      {
+        path: "approvePremium",
+        element: <ApprovePremium />,
+      },
+      {
+        path: "approveContactRequest",
+        element: <ApproveContactRequest />,
       },
     ],
   },
