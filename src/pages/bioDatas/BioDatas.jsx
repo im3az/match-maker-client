@@ -1,120 +1,79 @@
+import Loader from "../../components/Loader/Loader";
 import useBiodata from "../../hooks/useBiodata";
-import logo from "../../assets/logo.png";
+import Select from "react-select";
+import BioDataCard from "./BioDataCard";
+
+const ageOptions = [
+  { value: "18-30", label: "18-30" },
+  { value: "30-40", label: "30-40" },
+  { value: "40-50", label: "40-50" },
+  { value: "50-60", label: "50-60" },
+  { value: "60-70", label: "60-70" },
+  { value: "70-80", label: "70-80" },
+  { value: "80-90", label: "80-90" },
+  { value: "90-100", label: "90-100" },
+];
+
+const genderOptions = [
+  { value: "Male", label: "Male" },
+  { value: "Female", label: "Female" },
+];
+
+const divisionOptions = [
+  { value: "Dhaka", label: "Dhaka" },
+  { value: "Chattogram", label: "Chattogram" },
+  { value: "Rangpur", label: "Rangpur" },
+  { value: "Barisal", label: "Barisal" },
+  { value: "Khulna", label: "Khulna" },
+  { value: "Mymensing", label: "Mymensing" },
+  { value: "Sylhet", label: "Sylhet" },
+];
 
 const BioDatas = () => {
-  const [allBiodata] = useBiodata();
+  const [allBiodata, loading] = useBiodata();
+  if (loading) {
+    return <Loader />;
+  }
   return (
     <div>
-      {/* <h2>Biodatas: {allBiodata.length}</h2> */}
       <div className="flex max-w-7xl mx-auto">
+        {/* filter section */}
+
         <div className="w-64 min-h-screen">
           <div className="h-full p-3 space-y-2 w-60 bg-gray-50 text-gray-800">
             <div className="flex items-center p-2 ">
-              {/* <img src={logo} className="h-14 " alt="Logo" />
-              <span className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
-                Match Maker
-              </span>
-              <div>
-                <h2 className="text-lg font-semibold">{user?.displayName}</h2>
-                <span className="flex items-center space-x-1">
-                  <span className="text-xs text-gray-600">{user?.email}</span>
-                </span>
-              </div> */}
               <h2 className="text-3xl ">Filters</h2>
             </div>
-            <div className="divide-y divide-gray-400">
-              <ul className="pt-2 pb-4 space-y-1 text-sm">
+            <div className="">
+              <ul className="pt-2 pb-4 space-y-5 text-sm ">
                 <li className=" text-gray-900">
-                  {/* <NavLink
-                    style={({ isActive, isPending, isTransitioning }) => {
-                      return {
-                        fontWeight: isActive ? "bold" : "",
-                        color: isPending ? "red" : "black",
-                        viewTransitionName: isTransitioning ? "slide" : "",
-                      };
-                    }}
-                    to="/dashboard/editBiodata"
-                    className="flex items-center p-2 space-x-3 rounded-md"
-                  >
-                    <FaRegEdit />
-                    <span>Edit Biodata</span>
-                  </NavLink> */}
+                  <Select options={ageOptions} />
                 </li>
 
                 <li className=" text-gray-900">
-                  {/* <NavLink
-                    style={({ isActive, isPending, isTransitioning }) => {
-                      return {
-                        fontWeight: isActive ? "bold" : "",
-                        color: isPending ? "red" : "black",
-                        viewTransitionName: isTransitioning ? "slide" : "",
-                      };
-                    }}
-                    to="/dashboard/viewBiodata"
-                    className="flex items-center p-2 space-x-3 rounded-md"
-                  >
-                    <GrView />
-                    <span>View Biodata</span>
-                  </NavLink> */}
+                  <h2>Filter by gender:</h2>
+                  <Select options={genderOptions} />
                 </li>
 
                 <li className=" text-gray-900">
-                  {/* <NavLink
-                    style={({ isActive, isPending, isTransitioning }) => {
-                      return {
-                        fontWeight: isActive ? "bold" : "",
-                        color: isPending ? "red" : "black",
-                        viewTransitionName: isTransitioning ? "slide" : "",
-                      };
-                    }}
-                    to="/dashboard/myContactRequest"
-                    className="flex items-center p-2 space-x-3 rounded-md"
-                  >
-                    <GrContact />
-                    <span>My contact request</span>
-                  </NavLink> */}
-                </li>
-
-                <li className=" text-gray-900">
-                  {/* <NavLink
-                    style={({ isActive, isPending, isTransitioning }) => {
-                      return {
-                        fontWeight: isActive ? "bold" : "",
-                        color: isPending ? "red" : "black",
-                        viewTransitionName: isTransitioning ? "slide" : "",
-                      };
-                    }}
-                    to="/dashboard/favoriteBiodata"
-                    className="flex items-center p-2 space-x-3 rounded-md"
-                  >
-                    <GrFavorite />
-                    <span>Favorite Biodata</span>
-                  </NavLink> */}
-                </li>
-              </ul>
-
-              <ul className="pt-6 space-y-1">
-                <li className=" text-gray-900">
-                  {/* <NavLink to="/" className="flex items-center   ">
-                    <Button outline>
-                      <GrHome className="mr-2 h-4 w-6" />
-                      Home
-                    </Button>
-                  </NavLink> */}
-                </li>
-                <li>
-                  {/* <Button outline>
-                    <SlLogout className="mr-2 h-4 w-5" />
-                    Logout
-                  </Button> */}
+                  <h2>Filter by division:</h2>
+                  <Select options={divisionOptions} />
                 </li>
               </ul>
             </div>
           </div>
         </div>
+
         <div className="flex-1">
-          {/* <Outlet /> */}
-          <h2>All biodatas: {allBiodata.length}</h2>
+          <h2 className="text-center font-bold text-4xl lg:text-5xl  mb-10">All Biodata</h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10 mt-10 my-3">
+            {allBiodata.map((singleBiodata) => (
+              <BioDataCard
+                key={singleBiodata._id}
+                singleBiodata={singleBiodata}
+              ></BioDataCard>
+            ))}
+          </div>
         </div>
       </div>
     </div>
