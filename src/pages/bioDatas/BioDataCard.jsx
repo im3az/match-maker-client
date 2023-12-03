@@ -2,29 +2,11 @@ import { FaUser, FaBriefcase } from "react-icons/fa";
 import { BiMaleFemale } from "react-icons/bi";
 import { FaLocationDot } from "react-icons/fa6";
 import { GiTimeTrap } from "react-icons/gi";
+import { Button } from "flowbite-react";
 
 const BioDataCard = ({ singleBiodata }) => {
-  const {
-    age,
-    dateOfBirth,
-    email,
-    fathersName,
-    gender,
-    height,
-    image,
-    mobileNumber,
-    mothersName,
-    name,
-    occupation,
-    partnerAge,
-    partnerHeight,
-    partnerWeight,
-    permanentDivision,
-    presentDivision,
-    religion,
-    weight,
-    biodataId,
-  } = singleBiodata;
+  const { age, gender, image, name, occupation, permanentDivision, biodataId } =
+    singleBiodata;
   return (
     <div>
       <div className="w-full max-w-sm overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800">
@@ -64,6 +46,8 @@ const BioDataCard = ({ singleBiodata }) => {
             <h1 className="px-2 text-sm">Occupation: {occupation}</h1>
           </div>
         </div>
+
+        <Button className="mx-auto mb-4"> View Profile</Button>
       </div>
     </div>
   );
