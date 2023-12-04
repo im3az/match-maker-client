@@ -17,6 +17,7 @@ import AdminDashboard from "../pages/dashboard/Admin/AdminDashboard/AdminDashboa
 import ManageUsers from "../pages/dashboard/Admin/ManageUsers/ManageUsers";
 import ApprovePremium from "../pages/dashboard/Admin/ApprovePremium/ApprovePremium";
 import ApproveContactRequest from "../pages/dashboard/Admin/ApproveContactRequest/ApproveContactRequest";
+import AdminRoute from "./AdminRoute";
 
 export const router = createBrowserRouter([
   {
@@ -80,19 +81,35 @@ export const router = createBrowserRouter([
 
       {
         path: "adminDashboard",
-        element: <AdminDashboard />,
+        element: (
+          <AdminRoute>
+            <AdminDashboard />
+          </AdminRoute>
+        ),
       },
       {
         path: "manageUsers",
-        element: <ManageUsers />,
+        element: (
+          <AdminRoute>
+            <ManageUsers />
+          </AdminRoute>
+        ),
       },
       {
         path: "approvePremium",
-        element: <ApprovePremium />,
+        element: (
+          <AdminRoute>
+            <ApprovePremium />
+          </AdminRoute>
+        ),
       },
       {
         path: "approveContactRequest",
-        element: <ApproveContactRequest />,
+        element: (
+          <AdminRoute>
+            <ApproveContactRequest />
+          </AdminRoute>
+        ),
       },
     ],
   },

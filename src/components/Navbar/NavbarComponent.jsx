@@ -117,10 +117,10 @@ const NavbarComponent = () => {
                 </span>
               </Dropdown.Header>
               <Dropdown.Item>
-                <NavLink to="/dashboard">Dashboard</NavLink>
+                <NavLink className="w-full text-left" to="/dashboard">Dashboard</NavLink>
               </Dropdown.Item>
-              <Dropdown.Divider />
-              <Dropdown.Item onClick={handleLogout}>Log out</Dropdown.Item>
+              {/* <Dropdown.Divider /> */}
+              <Dropdown.Item className="text-center" onClick={handleLogout}>Log out</Dropdown.Item>
             </Dropdown>
           ) : (
             <li>
