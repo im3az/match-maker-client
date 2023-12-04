@@ -3,6 +3,7 @@ import { useForm, Controller } from "react-hook-form";
 import Select from "react-select";
 import useAuth from "../../../../hooks/useAuth";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const genderOptions = [
   { value: "Male", label: "Male" },
@@ -88,10 +89,20 @@ const EditBiodata = () => {
     console.log(biodataRes.data);
 
     if (biodataRes.data.upsertedCount > 0) {
-      alert("Biodata created");
+      Swal.fire({
+        icon: "success",
+        title: "Biodata created",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     }
     if (biodataRes.data.modifiedCount > 0) {
-      alert("Biodata Updated");
+      Swal.fire({
+        icon: "success",
+        title: "Biodata Updated",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     }
 
     reset();

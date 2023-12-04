@@ -1,11 +1,9 @@
 import { Button } from "flowbite-react";
 import useAxiosPublic from "../../../../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
 
 const ViewBiodataCard = ({ biodata }) => {
   const axiosPublic = useAxiosPublic();
-  const navigate = useNavigate();
 
   const {
     age,
