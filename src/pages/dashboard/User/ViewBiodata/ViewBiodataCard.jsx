@@ -1,6 +1,12 @@
 import { Button } from "flowbite-react";
+import useAxiosPublic from "../../../../hooks/useAxiosPublic";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const ViewBiodataCard = ({ biodata }) => {
+  const axiosPublic = useAxiosPublic();
+  const navigate = useNavigate();
+
   const {
     age,
     dateOfBirth,
@@ -21,6 +27,31 @@ const ViewBiodataCard = ({ biodata }) => {
     religion,
     weight,
   } = biodata;
+
+  const handlePremium = (name, email) => {
+    console.log(name, email);
+    const userInfo = {
+      name,
+      email,
+    };
+    axiosPublic
+      .post("/premiumRequest", userInfo)
+      .then((res) => {
+        if (res.data.insertedId) {
+          Swal.fire({
+            icon: "success",
+            title: "Request sent",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        } else {
+          Swal.fire("Already requested");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <div>
@@ -73,7 +104,12 @@ const ViewBiodataCard = ({ biodata }) => {
                 Mobile Number: {mobileNumber}
               </h2>
 
-              <Button className="mt-5">Make premium</Button>
+              <Button
+                onClick={() => handlePremium(name, email)}
+                className="mt-5"
+              >
+                Make premium
+              </Button>
             </div>
           </div>
         </div>
