@@ -16,7 +16,7 @@ import useAdmin from "../hooks/useAdmin";
 const Dashboard = () => {
   const { user, loading, logOut } = useAuth();
   const navigate = useNavigate();
-  const [isAdmin, isAdminLoading] = useAdmin();
+  const [isAdmin] = useAdmin();
 
   if (loading) {
     return (

@@ -42,6 +42,17 @@ const ApprovePremium = () => {
           })
           .catch((error) => console.log(error));
 
+        axiosSecure
+          .patch(`/biodata/premium/${user.email}`)
+          .then((res) => {
+            console.log(res.data);
+            if (res.data.modifiedCount > 0) {
+              refetch();
+              console.log("Biodata made premium");
+            }
+          })
+          .catch((error) => console.log(error));
+
         //
       }
     });
@@ -77,7 +88,10 @@ const ApprovePremium = () => {
                   </>
                 ) : (
                   <>
-                    <Button className="w-full" onClick={() => handleMakePremium(user)}>
+                    <Button
+                      className="w-full"
+                      onClick={() => handleMakePremium(user)}
+                    >
                       <MdWorkspacePremium className="text-white text-lg" />
                     </Button>
                   </>
