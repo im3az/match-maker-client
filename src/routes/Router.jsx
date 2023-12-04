@@ -44,7 +44,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/bioDataDetails/:id",
-        element: <BioDataDetails />,
+        element: (
+          <PrivateRoute>
+            <BioDataDetails />
+          </PrivateRoute>
+        ),
       },
       {
         path: "contactUs",

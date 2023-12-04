@@ -5,7 +5,11 @@ import { GiTimeTrap } from "react-icons/gi";
 import { Button } from "flowbite-react";
 import { Link } from "react-router-dom";
 
-const BioDataCard = ({ singleBiodata }) => {
+const BioDataCard = ({ singleBiodata, refetch }) => {
+  if (refetch) {
+    refetch();
+  }
+
   const {
     age,
     gender,
