@@ -18,6 +18,7 @@ import ManageUsers from "../pages/dashboard/Admin/ManageUsers/ManageUsers";
 import ApprovePremium from "../pages/dashboard/Admin/ApprovePremium/ApprovePremium";
 import ApproveContactRequest from "../pages/dashboard/Admin/ApproveContactRequest/ApproveContactRequest";
 import AdminRoute from "./AdminRoute";
+import BioDataDetails from "../pages/bioDataDetails/BioDataDetails";
 
 export const router = createBrowserRouter([
   {
@@ -40,6 +41,10 @@ export const router = createBrowserRouter([
             <BioDatas />
           </PrivateRoute>
         ),
+      },
+      {
+        path: "/bioDataDetails/:id",
+        element: <BioDataDetails />,
       },
       {
         path: "contactUs",

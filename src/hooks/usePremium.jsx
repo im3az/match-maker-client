@@ -1,16 +1,16 @@
 import { useQuery } from "react-query";
 import useAuth from "./useAuth";
-import useAxiosPublic from "./useAxiosPublic";
+import useAxiosSecure from "./useAxiosSecure";
 
 const usePremium = () => {
   const { user, loading } = useAuth();
-  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
 
   const { data: isPremium, isLoading: isPremiumLoading } = useQuery({
     queryKey: ["isPremium", user?.email],
     enabled: !loading,
     queryFn: async () => {
-      const res = await axiosPublic.get(`/users/premium/${user?.email}`);
+      const res = await axiosSecure.get(`/users/premium/${user?.email}`);
       console.log(res.data);
       return res.data?.premium;
     },

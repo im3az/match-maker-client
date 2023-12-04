@@ -3,10 +3,19 @@ import { BiMaleFemale } from "react-icons/bi";
 import { FaLocationDot } from "react-icons/fa6";
 import { GiTimeTrap } from "react-icons/gi";
 import { Button } from "flowbite-react";
+import { Link } from "react-router-dom";
 
 const BioDataCard = ({ singleBiodata }) => {
-  const { age, gender, image, name, occupation, permanentDivision, biodataId } =
-    singleBiodata;
+  const {
+    age,
+    gender,
+    image,
+    name,
+    occupation,
+    permanentDivision,
+    biodataId,
+    _id,
+  } = singleBiodata;
   return (
     <div>
       <div className="w-full max-w-sm overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800">
@@ -47,7 +56,9 @@ const BioDataCard = ({ singleBiodata }) => {
           </div>
         </div>
 
-        <Button className="mx-auto mb-4"> View Profile</Button>
+        <Link to={`/bioDataDetails/${_id}`}>
+          <Button className="mx-auto mb-4"> View Profile</Button>
+        </Link>
       </div>
     </div>
   );
